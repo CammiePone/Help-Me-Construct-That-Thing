@@ -1,0 +1,13 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "dev.cammiescorner.hmctt.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"client": [
+		"MinecraftClientMixin",
+		"WorldRendererMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
