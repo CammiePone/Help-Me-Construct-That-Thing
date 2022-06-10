@@ -13,6 +13,8 @@ group = project.maven_group
 repositories {
 	maven { url "https://jitpack.io" }
 	maven { url "https://ladysnake.jfrog.io/artifactory/mods" }
+	maven { url "https://api.modrinth.com/maven" }
+	maven { url "https://maven.terraformersmc.com" }
 }
 
 dependencies {
@@ -21,7 +23,9 @@ dependencies {
 
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	modImplementation "io.github.ladysnake:satin:${satin_version}"
+	modImplementation "io.github.ladysnake:satin:${project.satin_version}"
+	modImplementation "maven.modrinth:midnightlib:${project.midnightlib_version}"
+	modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 
 	implementation "com.github.LlamaLad7:MixinExtras:${project.mixinextras_version}"
 	annotationProcessor "com.github.LlamaLad7:MixinExtras:${project.mixinextras_version}"

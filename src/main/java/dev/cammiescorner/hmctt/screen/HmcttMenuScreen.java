@@ -42,7 +42,7 @@ public class HmcttMenuScreen extends Screen {
 		rotateRightButton = addDrawableChild(new HmcttButtonWidget(x + 232, y + 10, HmcttButtonWidget.ButtonType.ROTATE_RIGHT, this::doTransformButtonShit));
 		mirrorVerticalButton = addDrawableChild(new HmcttButtonWidget(x + 164, y + 10, HmcttButtonWidget.ButtonType.MIRROR_VERTICAL, this::doTransformButtonShit));
 		mirrorHorizontalButton = addDrawableChild(new HmcttButtonWidget(x + 180, y + 10, HmcttButtonWidget.ButtonType.MIRROR_HORIZONTAL, this::doTransformButtonShit));
-		placeModeButton = addDrawableChild(new ButtonWidget(x + 7, y + 131, 96, 20, new LiteralText("Place Structure"), this::doPlaceModeButtonShit));
+		placeModeButton = addDrawableChild(new ButtonWidget(x + 7, y + 131, 96, 20, new TranslatableText("text." + HmcttClient.MOD_ID + ".place_structure"), this::doPlaceModeButtonShit));
 
 		if(client != null) {
 			searchBar = addDrawableChild(new TextFieldWidget(client.textRenderer, x + 7, y + 7, 80, 14, new LiteralText("")));
@@ -55,7 +55,7 @@ public class HmcttMenuScreen extends Screen {
 			textZ.setText(String.valueOf(HmcttClient.offset.getZ()));
 		}
 
-		deselectButton = addDrawableChild(new ButtonWidget(x + 8, y + 24, 78, 20, new LiteralText("-- None --"), this::doListButtonShit));
+		deselectButton = addDrawableChild(new ButtonWidget(x + 8, y + 24, 78, 20, new TranslatableText("text." + HmcttClient.MOD_ID + ".deselect_button"), this::doListButtonShit));
 		drawListButtons();
 	}
 

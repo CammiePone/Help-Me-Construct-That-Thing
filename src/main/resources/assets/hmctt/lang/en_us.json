@@ -1,4 +1,14 @@
 {
+	"hmctt.midnightconfig.title": "Help My Construct That Thing!",
+	"hmctt.midnightconfig.blockTransparency": "Guide Block Transparency",
+	"hmctt.midnightconfig.blockScale": "Guide Block Size (needs Animated Guide Blocks OFF)",
+	"hmctt.midnightconfig.animateBlocks": "Animated Guide Blocks",
+	"hmctt.midnightconfig.wrongBlockColour": "Incorrect Block Color",
+
 	"category.hmctt.keyBinds": "Help Me Construct That Thing!",
-	"key.hmctt.menu": "Open Menu"
+	"key.hmctt.menu": "Open Menu",
+
+	"text.hmctt.menu": "Help Me Build That Thing!",
+	"text.hmctt.place_structure": "Place Structure",
+	"text.hmctt.deselect_button": "-- None --"
 }

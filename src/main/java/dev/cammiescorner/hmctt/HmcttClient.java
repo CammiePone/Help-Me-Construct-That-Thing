@@ -3,21 +3,18 @@ package dev.cammiescorner.hmctt;
 import com.mojang.blaze3d.systems.RenderSystem;
 import dev.cammiescorner.hmctt.models.TranslucentBakedModel;
 import dev.cammiescorner.hmctt.screen.HmcttMenuScreen;
+import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.FurnaceBlock;
-import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.*;
 import net.minecraft.client.render.block.BlockRenderManager;
 import net.minecraft.client.render.model.BakedModel;
-import net.minecraft.client.util.InputUtil;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.nbt.NbtCompound;
@@ -33,14 +30,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.glfw.GLFW;
 
-import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class HmcttClient implements ClientModInitializer {
 	public static final String MOD_ID = "hmctt";
@@ -62,7 +56,7 @@ public class HmcttClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
-		reloadStructureFiles();
+		MidnightConfig.init(MOD_ID, HmcttConfig.class);
 
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			clientTick++;
@@ -127,17 +121,20 @@ public class HmcttClient implements ClientModInitializer {
 				else {
 					matrices.translate(pos.getX(), pos.getY(), pos.getZ());
 
-					if(animated) {
-						matrices.translate(0.5, 0.5, 0.5);
+					matrices.translate(0.5, 0.5, 0.5);
+
+					if(animated)
 						matrices.scale(scale, scale, scale);
-						matrices.translate(-0.5, -0.5, -0.5);
-					}
+					else
+						matrices.scale(HmcttConfig.blockScale, HmcttConfig.blockScale, HmcttConfig.blockScale);
+
+					matrices.translate(-0.5, -0.5, -0.5);
 
 					vertices = vertexConsumers.getBuffer(RenderLayer.getTranslucent());
 					model = TranslucentBakedModel.wrap(blockRenderer.getModel(state), () -> HmcttConfig.blockTransparency);
 				}
 
-				blockRenderer.getModelRenderer().render(world, model, state, offset, matrices, vertices, false, random, state.getRenderingSeed(offset), OverlayTexture.DEFAULT_UV);
+				blockRenderer.getModelRenderer().render(world, model, state, offset, matrices, vertices, !animated, random, state.getRenderingSeed(offset), OverlayTexture.DEFAULT_UV);
 				matrices.pop();
 			}
 		}
