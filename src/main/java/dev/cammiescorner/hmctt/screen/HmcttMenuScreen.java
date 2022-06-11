@@ -2,6 +2,7 @@ package dev.cammiescorner.hmctt.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import dev.cammiescorner.hmctt.HmcttClient;
+import dev.cammiescorner.hmctt.mixin.WorldRendererAccessor;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
@@ -129,7 +130,7 @@ public class HmcttMenuScreen extends Screen {
 	private void renderStructurePreview(MatrixStack matrices, float delta) {
 		if(client != null && client.world != null) {
 			BlockRenderManager blockRenderer = client.getBlockRenderManager();
-			VertexConsumerProvider vertexConsumers = renderLayer -> client.worldRenderer.bufferBuilders.getEntityVertexConsumers().getBuffer(renderLayer);
+			VertexConsumerProvider vertexConsumers = renderLayer -> ((WorldRendererAccessor) client.worldRenderer).getBufferBuilders().getEntityVertexConsumers().getBuffer(renderLayer);
 			Random random = new Random();
 			float time = HmcttClient.clientTick + delta;
 

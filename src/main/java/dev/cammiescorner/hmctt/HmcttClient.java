@@ -1,6 +1,7 @@
 package dev.cammiescorner.hmctt;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import dev.cammiescorner.hmctt.mixin.StructureAccessor;
 import dev.cammiescorner.hmctt.models.TranslucentBakedModel;
 import dev.cammiescorner.hmctt.screen.HmcttMenuScreen;
 import eu.midnightdust.lib.config.MidnightConfig;
@@ -10,8 +11,6 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.ConnectingBlock;
-import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.*;
@@ -187,7 +186,7 @@ public class HmcttClient implements ClientModInitializer {
 			return;
 		}
 
-		List<Structure.StructureBlockInfo> randInfoList = placementData.getRandomBlockInfos(structure.blockInfoLists, pos).getAll();
+		List<Structure.StructureBlockInfo> randInfoList = placementData.getRandomBlockInfos(((StructureAccessor) structure).getBlockInfoLists(), pos).getAll();
 		List<Structure.StructureBlockInfo> infoList = Structure.process(MinecraftClient.getInstance().world, pos, pos, placementData, randInfoList);
 
 		for(Structure.StructureBlockInfo info : infoList)
