@@ -68,7 +68,7 @@ public class HmcttMenuScreen extends Screen {
 		DrawableHelper.drawTexture(matrices, x, y, 0, 0, 0, 256, 158, 256, 256);
 		DrawableHelper.drawTexture(matrices, x + 90, y + 24 + scroll, 0, 0, 160, 12, 15, 256, 256);
 		setBlockPos();
-		renderStructurePreview(matrices, delta);
+//		renderStructurePreview(matrices, delta);
 
 		placeModeButton.active = HmcttClient.listIndex >= 0;
 		rotateLeftButton.active = HmcttClient.listIndex >= 0;

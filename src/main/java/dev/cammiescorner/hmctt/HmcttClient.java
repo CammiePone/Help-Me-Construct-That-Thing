@@ -10,6 +10,8 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.ConnectingBlock;
+import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.*;
@@ -173,9 +175,7 @@ public class HmcttClient implements ClientModInitializer {
 		structureMap.clear();
 
 		BlockPos pos = BlockPos.ORIGIN;
-		StructurePlacementData placementData = new StructurePlacementData();
-		placementData.setRotation(rotation);
-		placementData.setMirror(mirror);
+		StructurePlacementData placementData = new StructurePlacementData().setRotation(rotation).setMirror(mirror);
 		Structure structure = new Structure();
 
 		try {
@@ -192,7 +192,7 @@ public class HmcttClient implements ClientModInitializer {
 
 		for(Structure.StructureBlockInfo info : infoList)
 			if(!info.state.isAir())
-				structureMap.put(info.pos, info.state);
+				structureMap.put(info.pos, info.state.rotate(rotation).mirror(mirror));
 
 		structureWidth = structure.getSize().getX();
 		structureLength = structure.getSize().getZ();
